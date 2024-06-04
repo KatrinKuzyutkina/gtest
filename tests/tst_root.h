@@ -30,7 +30,7 @@ TEST(root, float_input_float_out) {
 }
 
 TEST(root, one_root) {
-    result = roots(arr, 1, -6, 9);
+    result = roots(arr, 1, -6, 7);
     ASSERT_EQ(result, 1);
     ASSERT_EQ(arr[0], 3);
     ASSERT_EQ(arr[1], 3);
