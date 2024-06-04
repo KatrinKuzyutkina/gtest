@@ -1,7 +1,8 @@
-#ifndef TST_ROOT_H
-#define TST_ROOT_H
+#ifndef TST_ROOTS_H
+#define TST_ROOTS_H
 
 #include <gtest/gtest.h>
+#include <gmock/gmock-matchers.h>
 
 #include <fcntl.h>
 #include <errno.h>
@@ -10,30 +11,40 @@
 extern "C" {
 #include "root.h"
 }
-double array[2];
-TEST(testroot, right_answer) {
-    root(array, 1, -3, 2);
-    ASSERT_EQ(array[0], 2);
-    ASSERT_EQ(array[1], 1);
+
+int result;
+double arr[2];
+
+TEST(root, right_answer) {
+    result = roots(arr, 1, -5, 6);
+    ASSERT_EQ(result, 1);
+    ASSERT_EQ(arr[0], 3);
+    ASSERT_EQ(arr[1], 2);
 }
-TEST(testroot, double_answer) {
-    root(array, 1, -4, 3.75);
-    ASSERT_EQ(array[0], 2.5);
-    ASSERT_EQ(array[1], 1.5);
+
+TEST(root, float_input_float_out) {
+    result = roots(arr, 1, -4, 3.75);
+    ASSERT_EQ(result, 1);
+    ASSERT_EQ(arr[0], 2.5);
+    ASSERT_EQ(arr[1], 1.5);
 }
-TEST(testroot, zerod_answer) {
-    root(array, 1, -2, 1);
-    ASSERT_EQ(array[0], 1);
-    ASSERT_EQ(array[1], 1);
+
+TEST(root, one_root) {
+    result = roots(arr, 1, -6, 9);
+    ASSERT_EQ(result, 1);
+    ASSERT_EQ(arr[0], 3);
+    ASSERT_EQ(arr[1], 3);
 }
-TEST(testroot, minusd_answer) {
-    root(array, 1, -2, 2);
-    ASSERT_EQ(array[0], 5051);
-    ASSERT_EQ(array[1], 5051);
+
+TEST(root, invalid_input) {
+    result = roots(arr, 0, 0, 0);
+    ASSERT_EQ(result, 0);
 }
-TEST(testroot, zeroa_answer) {
-    root(array, 0, -2, 1);
-    ASSERT_EQ(array[0], 5051);
-    ASSERT_EQ(array[1], 5051);
+
+
+TEST(root, no_root) {
+    result = roots(arr, 1, 2, 3);
+    ASSERT_EQ(result, 0);
 }
-#endif // TST_ROOT_H
+
+#endif // TST_ROOTS_H
