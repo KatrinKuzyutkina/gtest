@@ -1,8 +1,6 @@
-#ifndef ROOT_H
-#define ROOT_H
+#ifndef ROOTS_H
+#define ROOTS_H
 
-#include <math.h>
+int roots(double* arr, double a, double b, double c);
 
-void root(double* roots,double a, double b, double c);
-
-#endif // ROOT_H
+#endif
